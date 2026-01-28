@@ -8,7 +8,7 @@
 ## 📖 Executive Summary
 This project details the architectural transformation of Audi's car configurator platform—a highly business-critical application used by dealers and customers worldwide. 
 
-To address challenges with on-premises scalability, resource overprovisioning, and global latency, the system was migrated from a monolithic architecture to a containerized microservices architecture on **Amazon EKS**. A key component of this solution is the implementation of **Karpenter**, allowing for rapid, cost-effective, and flexible node autoscaling[cite: 39].
+To address challenges with on-premises scalability, resource overprovisioning, and global latency, the system was migrated from a monolithic architecture to a containerized microservices architecture on **Amazon EKS**. A key component of this solution is the implementation of **Karpenter**, allowing for rapid, cost-effective, and flexible node autoscaling.
 
 ## 🏗️ Architecture Blueprint
 *(See `assets/diagrams` for the full schematic)*
