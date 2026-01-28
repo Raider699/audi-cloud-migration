@@ -13,7 +13,7 @@ To address challenges with on-premises scalability, resource overprovisioning, a
 ## 🏗️ Architecture Blueprint
 *(See `assets/diagrams` for the full schematic)*
 
-![Architecture Diagram](assets/diagrams/audi-architecture.png)
+![Architecture Diagram](https://github.com/Raider699/audi-cloud-migration/blob/main/audi_image.png)
 
 ### Key Architectural Decisions
 
