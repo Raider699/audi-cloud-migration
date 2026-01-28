@@ -1,36 +1,41 @@
-# Audi Cloud Migration: Monolith to Cloud-Native Microservices on AWS
+# Audi Cloud Migration: Monolith to Cloud-Native Microservices
 
-![AWS](https://img.shields.io/badge/AWS-Cloud-orange) ![Terraform](https://img.shields.io/badge/Infrastructure-Terraform-purple) ![Kubernetes](https://img.shields.io/badge/Orchestration-EKS-blue)
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?logo=amazon-aws) 
+![Kubernetes](https://img.shields.io/badge/Orchestration-EKS-blue?logo=kubernetes) 
+![Terraform](https://img.shields.io/badge/IaC-Terraform-purple?logo=terraform) 
+![Karpenter](https://img.shields.io/badge/Scaling-Karpenter-green)
 
 ## 📖 Executive Summary
-[cite_start]This project outlines the architectural transformation of Audi's car configurator platform from an on-premises monolithic application to a scalable, global microservices architecture on Amazon AWS[cite: 16, 20].
+This project details the architectural transformation of Audi's car configurator platform—a highly business-critical application used by dealers and customers worldwide. 
 
-[cite_start]The solution leverages **Amazon EKS** for orchestration and **Karpenter** for just-in-time node provisioning, addressing critical issues regarding latency, resource overprovisioning, and deployment agility[cite: 25, 39].
+To address challenges with on-premises scalability, resource overprovisioning, and global latency, the system was migrated from a monolithic architecture to a containerized microservices architecture on **Amazon EKS**. A key component of this solution is the implementation of **Karpenter**, allowing for rapid, cost-effective, and flexible node autoscaling[cite: 39].
 
 ## 🏗️ Architecture Blueprint
-*(Place your Draw.io diagram in assets/diagrams and it will appear here)*
-![Architecture Diagram](assets/diagrams/audi-architecture-v1.png)
+*(See `assets/diagrams` for the full schematic)*
+
+![Architecture Diagram](assets/diagrams/audi-architecture.png)
 
 ### Key Architectural Decisions
-| Component | Technology | Rationale |
-| :--- | :--- | :--- |
-| **Compute** | Amazon EKS | [cite_start]Migrated to containerized architecture to split monolith into microservices[cite: 37]. |
-| **Autoscaling** | **Karpenter** | [cite_start]Replaces standard autoscaler to optimize EC2 purchasing options and handle spikes instantly[cite: 39]. |
-| **IaC** | Terraform & CloudFormation | [cite_start]Hybrid approach to infrastructure automation as utilized by Audi's team[cite: 32]. |
-| **Latency** | AWS Regions | [cite_start]Deployed workloads closer to overseas customers to solve latency issues[cite: 29]. |
 
-## 🚀 Implementation Strategy
-1.  **Network Layer:** Multi-AZ VPC deployment for high availability.
-2.  [cite_start]**Compute Layer:** EKS Cluster utilizing **Cluster Autoscaler** and **Karpenter** for efficient resource management[cite: 37, 39].
-3.  [cite_start]**Deployment:** Blue/Green deployment strategy to stabilize the environment during updates[cite: 34].
+| Challenge | Solution Implemented | Rationale |
+| :--- | :--- | :--- |
+| **Monolithic Scalability** | **Amazon EKS (Microservices)** | [Split the monolith into containers to allow independent scaling and updates for individual markets. |
+| **Slow Provisioning** | **Terraform & CloudFormation** | Adopted a hybrid Infrastructure as Code (IaC) approach to speed up environment setup from weeks to minutes. |
+| **Cost & Agility** | **Karpenter** | Replaced standard autoscalers with Karpenter to dynamically provision rightsized EC2 instances (Spot/On-Demand) and support multi-architecture nodes. |
+| **Global Latency** | **AWS Regions** | Deployed workloads in regions physically closer to overseas customers to reduce latency. |
+| **Stability** | **Blue/Green Deployments** | Implemented traffic-shifting strategies to cover resource spikes and ensure safe releases. |
 
 ## 📂 Repository Structure
-* `/docs`: Detailed implementation guide and case study analysis.
-* `/infrastructure`: Terraform configuration files broken down by modules.
+
+* `docs/`: Detailed implementation guide explaining the migration logic.
+* `infrastructure/`: Terraform modules for VPC, EKS, and Karpenter setup.
+* `assets/`: Architectural diagrams and reference images.
 
 ## 🛠️ Getting Started
-To view the infrastructure plan:
+
+To initialize the infrastructure plan:
+
 ```bash
-cd infrastructure/terraform
+cd infrastructure
 terraform init
 terraform plan
